@@ -4,16 +4,31 @@ namespace App\Traits;
 use App\Models\Comment;
 use App\Mail\CommentMail;
 use App\Mail\VoteMail;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 trait HelperTrait{
 
-    public function storeImage($uploadImage)
+    public function storeImage($request,$postId)
     {
-        $feedData['image'] = $uploadImage->storeAs('images/report', $uploadImage->getClientOriginalName());
-        $uploadImage->move(public_path('images/report'),$feedData['image']);
-        return $feedData['image'];
+
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+            $fileUrls = [];
+            $imagesData = [];
+            
+            foreach ($files as $file) {
+                $destinationPath = 'images'; // e.g., public/uploads/images
+                $fileName = time() . '-' . $file->getClientOriginalName();
+                $file->move(public_path($destinationPath), $fileName);
+                $fileUrl = asset($destinationPath . '/' . $fileName);
+                $fileUrls[] = $fileUrl;
+                $imagesData[] = ['url' => $fileUrl,'post_id'=>$postId];
+            }
+            return $imagesData;
+        }
+       
     }
 
 
