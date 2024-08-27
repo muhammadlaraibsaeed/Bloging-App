@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::has('posts')->with("posts.images")->get()->map(function ($user) {
+                 $user->posts = $user->posts->take(5);
+                 return $user;
+        });
+        return view('home',compact('users'));
     }
 }

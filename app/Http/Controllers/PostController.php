@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
-use Illuminate\Http\Request;
-use App\Repositories\PostRepository;
+use App\Events\PostAdded;
 use App\Traits\HelperTrait;
+use Illuminate\Http\Request;
+use App\Jobs\PostMailToAllUser;
+use App\Mail\PostMailToAllUsers;
+use App\Repositories\PostRepository;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
