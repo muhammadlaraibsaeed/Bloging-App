@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::post('store/post',[PostController::class,'store'])->name('post.store');
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get("lists/post",[PostController::class,"getListPost"])->name("get.list.post");
+
+Route::post("store/like",[LikeController::class,"store"])->name("store.like");

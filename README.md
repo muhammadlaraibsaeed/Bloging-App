@@ -1,66 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Finijeers Coding Challenge Solution 💻
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Make sure your internet connection is active because I am using the Content Delivery Network (CDN) for Bootstrap and jQuery.
 
-## About Laravel
+## Tech Stack for this Solution 🐘
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   Laravel ^10.10, PHP ^8.1.
+-   Bootsrap 5
+-   JQuery
+-   MySQL
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Getting Started 🏃
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   Create a local copy of the repository.
+-   Make sure you have xxamp or something similiar.
+-   Create a database, name it 'laravel_ikionic'.
+-   Setup .env file `cp .env .example .env`
+-   Run `composer install` and `php artisan key:generate`.
+-   When you see the login page, head over the register page, create an account and log in. After     that you wil able do following thiings Add ,Comments,Like,Dislikes FeedBack.
+-   `php artisan migrate` For Migration Table Into Database
+- When you see the login page, head over to the register page, create an account, and log in. After that, you will be able to add posts, like posts, and store multiple images.
 
-## Learning Laravel
+# Solution ✅
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Fetch Users with Posts
+- Retrieve all users who have at least one post.
+- For each user, retrieve a maximum of 5 posts.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Like System for Posts
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- List all posts, indicating whether the current user has liked each post.
+    
+## List all posts, indicating whether the current user has liked each post.
 
-## Laravel Sponsors
+-  Store multiple images associated with posts in the database and storage.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Automatic Post Deletion
+- A Laravel command is set up to automatically delete posts after 24 hours. You can trigger it manually using `php artisan schedule:run` or ensure it runs regularly with Laravel's task scheduler
 
-### Premium Partners
+## Command to Delete Posts
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- To automatically delete posts after 24 hours, run `php artisan  delete:posts` in the background or set up a cron job to run Laravel's scheduler
+- 
+## Email Notification Queue
 
-## Contributing
+- Ensure that the php artisan queue:work command is running in the background for job queues to process email notifications when new posts are added.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## Form Validation Rule
+ Title Required
+ Image Required
+ 
+ ## Notification Setting
+- I have set up Mailtrap to send notifications when new posts are created.
+- Make sure your email settings are correctly configured in the .env file.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<!-- Link For Mailtrap -->
+https://mailtrap.io/home
 
-## Security Vulnerabilities
+## Queue with Email
+- To ensure that post notifications are queued and emails are sent, run the `php artisan queue:work` command. If the queue is not running, notifications will remain in the jobs table without sending emails.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

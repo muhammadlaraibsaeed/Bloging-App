@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
-use App\Events\PostAdded;
-use App\Traits\HelperTrait;
 use Illuminate\Http\Request;
-use App\Jobs\PostMailToAllUser;
-use App\Mail\PostMailToAllUsers;
 use App\Repositories\PostRepository;
-use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
-    use HelperTrait;
     protected $postRepository;
     
     public function __construct(PostRepository $postRepository) {
@@ -26,9 +19,18 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-            $request->merge(['user_id' => auth()->user()->id]);
-            $postID = $this->postRepository->create($request->only("title", "user_id"));
-            $imageURl =  $this->storeImage($request,$postID->id);
-            Image::insert($imageURl);
+            $request->merge([
+                'user_id' => auth()->user()->id,
+                'request' => $request,
+            ]);
+            $postID = $this->postRepository->create($request->only("title", "user_id","request"));
+            return response()->json(['message'=>"Post SuccessFully Created"]);
+
+    }
+
+    public function getListPost()
+    {
+        $users = $this->postRepository->getListPost();
+        return view('postsListing',compact('users'));
     }
 }

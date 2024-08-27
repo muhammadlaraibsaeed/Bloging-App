@@ -51,4 +51,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function like(){
+        return $this->hasOne(Like::class);
+    }
+
 }

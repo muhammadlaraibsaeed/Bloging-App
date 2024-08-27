@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::has('posts')->with("posts.images")->get()->map(function ($user) {
+        $users = User::has('posts')->with("posts.images","like")->get()->map(function ($user) {
                  $user->posts = $user->posts->take(5);
                  return $user;
         });

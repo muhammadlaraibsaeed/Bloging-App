@@ -26,6 +26,11 @@ class Post extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function like()
+    {
+        return $this->hasOne(Like::class);
+    }
+
     // Event Listner
     protected static function booted()
     {
